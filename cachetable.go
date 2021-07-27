@@ -142,7 +142,7 @@ func (table *CacheTable) expirationCheck() {
 		// Cache values so we don't keep blocking the mutex.
 		item.RLock()
 		lifeSpan := item.lifeSpan
-		accessedOn := item.accessedOn
+		accessedOn := item.createdOn // 根据创建时间设置过期
 		item.RUnlock()
 
 		if lifeSpan == 0 {
@@ -285,9 +285,10 @@ func (table *CacheTable) Value(key interface{}, args ...interface{}) (*CacheItem
 
 	if ok {
 		// Update access counter and timestamp.
-		r.KeepAlive()
+		r.KeepAlive()	// 1. 如果数据被定时（间隔小于lifetime）消息会永不过时
 		return r, nil
 	}
+	const defaultTime = time.Second*3
 
 	// Item doesn't exist in cache. Try and fetch it with a data-loader.
 	if loadData != nil {
@@ -296,8 +297,9 @@ func (table *CacheTable) Value(key interface{}, args ...interface{}) (*CacheItem
 			table.Add(key, item.lifeSpan, item.data)
 			return item, nil
 		}
-
-		return nil, ErrKeyNotFoundOrLoadable
+		table.Add(key,defaultTime,nil)
+		return NewCacheItem(key,defaultTime,nil),nil
+		//return nil, ErrKeyNotFoundOrLoadable	// 2. 消息查不到时将会导致缓存穿透问题
 	}
 
 	return nil, ErrKeyNotFound
