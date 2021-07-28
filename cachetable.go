@@ -297,9 +297,7 @@ func (table *CacheTable) Value(key interface{}, args ...interface{}) (*CacheItem
 			table.Add(key, item.lifeSpan, item.data)
 			return item, nil
 		}
-		table.Add(key,defaultTime,nil)
-		return NewCacheItem(key,defaultTime,nil),nil
-		//return nil, ErrKeyNotFoundOrLoadable	// 2. 消息查不到时将会导致缓存穿透问题
+		return nil, ErrKeyNotFoundOrLoadable	// 2. 消息查不到时将会导致缓存穿透问题
 	}
 
 	return nil, ErrKeyNotFound
