@@ -93,6 +93,18 @@ func TestExists(t *testing.T) {
 	}
 }
 
+func TestCacheTable_SetDataLoader(t *testing.T) {
+	table := Cache("SetDataLoader")
+	table.SetDataLoader(func(key interface{}, args ...interface{}) *CacheItem {
+		if key != "1" {
+			return nil
+		}
+		return NewCacheItem(key, 20*time.Second, "1")
+	})
+	item, _ := table.Value("1")
+	t.Log(item)
+}
+
 func TestNotFoundAdd(t *testing.T) {
 	table := Cache("testNotFoundAdd")
 

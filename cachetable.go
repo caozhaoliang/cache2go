@@ -298,12 +298,11 @@ func (table *CacheTable) Value(key interface{}, args ...interface{}) (*CacheItem
 			return r, nil
 		}
 		item := loadData(key, args...)
+		table.Unlock()
 		if item != nil {
 			table.Add(key, item.lifeSpan, item.data)
-			table.Unlock()
 			return item, nil
 		}
-		table.Unlock()
 		return nil, ErrKeyNotFoundOrLoadable // 2. 消息查不到时将会导致缓存穿透问题
 	}
 
