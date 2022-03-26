@@ -285,19 +285,26 @@ func (table *CacheTable) Value(key interface{}, args ...interface{}) (*CacheItem
 
 	if ok {
 		// Update access counter and timestamp.
-		r.KeepAlive()	// 1. 如果数据被定时（间隔小于lifetime）消息会永不过时
+		r.KeepAlive() // 1. 如果数据被定时（间隔小于lifetime）消息会永不过时
 		return r, nil
 	}
-	const defaultTime = time.Second*3
+	const defaultTime = time.Second * 3
 
 	// Item doesn't exist in cache. Try and fetch it with a data-loader.
 	if loadData != nil {
+		table.Lock()
+		if r, ok := table.items[key]; ok { // 由于上面的读锁是可重入的，因此并发下可能多次调用loadData
+			table.Unlock()
+			return r, nil
+		}
 		item := loadData(key, args...)
 		if item != nil {
 			table.Add(key, item.lifeSpan, item.data)
+			table.Unlock()
 			return item, nil
 		}
-		return nil, ErrKeyNotFoundOrLoadable	// 2. 消息查不到时将会导致缓存穿透问题
+		table.Unlock()
+		return nil, ErrKeyNotFoundOrLoadable // 2. 消息查不到时将会导致缓存穿透问题
 	}
 
 	return nil, ErrKeyNotFound

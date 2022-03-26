@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/conf/config.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/go.mod">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/internal/dflow/executors/rt_collector_dbz.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/internal/dflow/executors/rt_collector_dbz_mysql.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/internal/dflow/executors/rt_collector_dbz_sqlserver.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/internal/dflow/executors/rt_collector_dbz_test.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/internal/dflow/flow_service.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/internal/dflow/logging/kafka_consumer/kafka_consumer.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/internal/dflow/logging/kafka_consumer/proto/proto.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/internal/dflow/logging/kafka_consumer/vector_debezium_cfg.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-dataflow/internal/dflow/serve.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../dmp/bigdata-modeling/internal/realtime/flink/cluster_scheduler.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/cachetable.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../project-layout/pkg/kafka_client/consumer.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
